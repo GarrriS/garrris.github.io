@@ -65,11 +65,11 @@
                                     }
                     noAppUids = uidArr.join(',');
                                 }
-                        VK.api("getProfiles", {uids:noAppUids,fields:"photo_rec"}, function(data) {
+                        VK.api("users.get", {uids:noAppUids,fields:"photo_50"}, function(data) {
                         var profilesCount = data.response.length;
                         var profilesStr = '';
                         for (var i=0; i<profilesCount; i++) {
-                        profilesStr += '<a onclick="newuser(' +  data.response[i].uid + ', 'photo5334324_279072406');" title="' + data.response[i].first_name + ' ' + data.response[i].last_name + '"><img src="' + data.response[i].photo_rec + '" /></a> ';
+                        profilesStr += '<a onclick="newuser(' +  data.response[i].id + ', '');" title="' + data.response[i].first_name + ' ' + data.response[i].last_name + '"><img src="' + data.response[i].photo_50 + '" /></a> ';
                         }
                         document.getElementById('friends_list').innerHTML = '<div id="dld"><center>'+profilesStr+'</center></div>';
                         });
