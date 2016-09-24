@@ -9,15 +9,10 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico" />
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
-    <script src="https://ad.mail.ru/static/vkadman.min.js"></script>
-    <script src="https://js.appscentrum.com/scr/preroll.js"></script>
+
     <script type="text/javascript">
         VK.init(function() {
-                var user_id = null;
-                var app_id = 5609100;
-                var a = new VKAdman();
-                a.setupPreroll(app_id);
-                admanStat(app_id, user_id);
+
             },
             function() {
                 alert('VK API Loading Eror!');
@@ -32,9 +27,7 @@
     <p class="header">MagicSquare</p>
     <div class="template-wrap clear">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="500px" width="500px"></canvas>
-        <br>
-        <div class="fullscreen"><img src="TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
-        <div class="title">Magic Square</div>
+
 
         <div id="vk_like"></div>
         <div id="vk_comments"></div>
