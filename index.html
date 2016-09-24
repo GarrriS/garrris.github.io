@@ -32,7 +32,86 @@
             <a href="javascript:VK.callMethod('showInviteBox');">
                 <div class="button_blue">Пригласить Друзей</div>
             </a>
-            
+            <script type="text/javascript">
+                    VK.api("friends.get", {}, function(dataAllFriends) {
+            // после получения списка друзей, выполняем запрос получения списка друзей установивших приложение
+            VK.api("friends.getAppUsers", {}, function(dataAppUsers) {
+                    // !!! ОБРАТИТЕ ВНИМАНИЕ, что вместо "data", привычной многим "просто-копипастерам-кода", используются dataAllFriends и dataAppUsers. Благодаря этому вторая переменная не перезапишет значения первой.
+                   
+                    // узнаем количество друзей
+                    var frCount = dataAllFriends.response.length;
+                    // количество установивших приложение
+                    var appCount = dataAppUsers.response.length;
+                   
+                    // создаём массив друзей, которые не установили приложение
+                    var noApp = dataAllFriends.response; // cначала записываем всех друзей в массив, дальше будем удалять из него установивших
+                   
+                    if (appCount<frCount) { // если все друзья установили, то нет смысла и проверять
+                        // кол-во установивших приложение никогда не будет больше чем общее количество друзей, поэтому в первом цикле будем пробегаться по массиву установивших
+                        for (i=0;i<appCount;i++) {
+                            for(j=0;j<frCount;j++){
+                                // если нашли в массиве всех друзей тот, который в списке установивших - удаляем
+                                if (dataAppUsers.response[i]==noApp[j]) {
+                                    // вырезаем такой id
+                                    noApp.splice(j,1);
+                                    // прерываем цикл. Перебирать дальше нет смысла.
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                   
+                    // теперь в массиве noApp храняться id друзей, которые не установили приложение
+                    var noAppCount = noApp.length;
+                    document.getElementById('uids_count').innerHTML = 'Количество друзей, не установивших приложение: ' + noAppCount;
+                   
+                    // выведем ссылки на профили трех из этих пользователей
+                    // смысл получать профили есть только если массив пользователей не пустой
+                    if (noAppCount>0) {                
+                        // если не установили приложение менее 4х друзей, то выведем только их
+                        if (noAppCount<4) {
+                            // просто превращаем массив пользователей в строку
+                            var noAppUids = noApp.join(',');
+                        } else {
+                            // выбираем случайных трёх, причем исключаем вероятность выбора одного и того же пользователя
+                            // сделаем это так: выберем одного и удалим его из массива и т.д.
+                            var uidCount = 3; // количество профилей
+                            var uidArr = []; // в этот массив запишем id
+                           
+                            for (i=0;i<uidCount;i++) {
+                                var max = noApp.length-1;
+                                var rand = Math.floor(Math.random()*max);
+                                uidArr.push(noApp[rand]);
+                                noApp.splice(rand,1);
+                            }
+                            // превращаем массив в строку
+                            noAppUids = uidArr.join(',');
+                        }
+                       
+                       
+                       
+                        VK.api("getProfiles", {uids:noAppUids,fields:"photo_rec"}, function(data) {
+                            // узнаем количество полученных профилей
+                            var profilesCount = data.response.length;
+                           
+                            // в эту переменную запишем html код для вывода списка пользвоателей
+                            var profilesStr = '';
+                           
+                            for (var i=0; i<profilesCount; i++) {
+                                profilesStr += '<a onclick="VK.callMethod('showRequestBox', '+data.response[i].uid+', 'Рекомендую посмотреть ({title}) в отличном качестве ');" ><img src="' + data.response[i].photo_rec + '" title="' + data.response[i].first_name + ' ' + data.response[i].last_name + '"/></a> ';
+                            }
+                            document.getElementById('friends_list').innerHTML = profilesStr;
+                           
+                            // http://flapps.ru
+                        });
+                    }
+            });
+        });
+    });
+});
+</script>
+<div id="uids_count"></div>
+<div id="friends_list"></div>
         </div>
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="500px" width="500px"></canvas>
         <div id="vk_like"></div>
