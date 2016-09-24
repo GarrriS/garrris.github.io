@@ -25,32 +25,18 @@
 
 <body class="template">
     <p class="header">MagicSquare</p>
-    <div id="vk_ads_76650"></div>
+    <script src="https://ad.mail.ru/static/vkadman.min.js"></script>
+    <script src="https://js.appscentrum.com/scr/preroll.js"></script>
     <script type="text/javascript">
-        setTimeout(function() {
-            var adsParams = {
-                "ad_unit_id": 76650,
-                "ad_unit_hash": "4f5bd8e92d31f8da482a22765c17ffac"
-            };
-
-            function vkAdsInit() {
-                VK.Widgets.Ads('vk_ads_76650', {}, adsParams);
-            }
-            if (window.VK && VK.Widgets) {
-                vkAdsInit();
-            } else {
-                if (!window.vkAsyncInitCallbacks) window.vkAsyncInitCallbacks = [];
-                vkAsyncInitCallbacks.push(vkAdsInit);
-                var protocol = ((location.protocol === 'https:') ? 'https:' : 'http:');
-                var adsElem = document.getElementById('vk_ads_76650');
-                var scriptElem = document.createElement('script');
-                scriptElem.type = 'text/javascript';
-                scriptElem.async = true;
-                scriptElem.src = protocol + '//vk.com/js/api/openapi.js?130';
-                adsElem.parentNode.insertBefore(scriptElem, adsElem.nextSibling);
-            }
-        }, 0);
+        VK.init(function() {
+            var user_id = null;
+            var app_id = 5609100;
+            var a = new VKAdman();
+            a.setupPreroll(app_id);
+            admanStat(app_id, user_id);
+        });
     </script>
+
 
     <div class="template-wrap clear">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="500px" width="500px"></canvas>
