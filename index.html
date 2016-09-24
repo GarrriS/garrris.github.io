@@ -24,14 +24,19 @@
 </head>
 
 <body class="template">
-    <p class="header">MagicSquare</p>
-    <div class="template-wrap clear">
-        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="500px" width="500px"></canvas>
-        <br>
-        <a href="javascript:VK.callMethod('showInviteBox');">
-            <div class="button_blue">Пригласить Друзей</div>
-        </a>
 
+    <p class="header">MagicSquare</p>
+
+    <div class="template-wrap clear">
+        <div>
+            <a href="javascript:VK.callMethod('showInviteBox');">
+                <div class="button_blue">Пригласить Друзей</div>
+            </a>
+            <a href="javascript:VK.callMethod('showInviteBox');">
+                <div class="button_blue">Пригласить Друзей</div>
+            </a>
+        </div>
+        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="500px" width="500px"></canvas>
         <div id="vk_like"></div>
         <div id="vk_comments"></div>
     </div>
