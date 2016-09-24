@@ -9,7 +9,8 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico" />
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
-
+    <script src="https://ad.mail.ru/static/vkadman.min.js"></script>
+    <script src="https://js.appscentrum.com/scr/preroll.js"></script>
     <script type="text/javascript">
         VK.init(function() {
 
@@ -17,16 +18,11 @@
             function() {
                 alert('VK API Loading Eror!');
             },
-            '5.53');
+            '5.23');
 
         }
     </script>
-</head>
 
-<body class="template">
-    <p class="header">MagicSquare</p>
-    <script src="https://ad.mail.ru/static/vkadman.min.js"></script>
-    <script src="https://js.appscentrum.com/scr/preroll.js"></script>
     <script type="text/javascript">
         VK.init(function() {
             var user_id = null;
@@ -37,7 +33,10 @@
         });
     </script>
 
+</head>
 
+<body class="template">
+    <p class="header">MagicSquare</p>
     <div class="template-wrap clear">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="500px" width="500px"></canvas>
         <br>
