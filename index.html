@@ -9,10 +9,19 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico" />
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+    <script type="text/javascript" src="//ad.mail.ru/static/vkadman.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="//js.appscentrum.com/scr/preroll.js" charset="utf-8"></script>
 
     <script type="text/javascript">
         VK.init(function() {
-
+                var user_id = null; //id пользователя 
+                var app_id = 5609100; //id вашего приложения
+                var a = new VKAdman();
+                a.setupPreroll(app_id, {
+                    preview: 8
+                }); //для проверки корректности работы рекламы
+                //a.setupPreroll(app_id);
+                admanStat(app_id, user_id);
             },
             function() {
                 alert('VK API Loading Eror!');
